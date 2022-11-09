@@ -7,13 +7,14 @@ const wrstr = fs.createWriteStream(filePath);
 stdout.write('Hello, write text!\n');
 
 stdin.on('data', data => {
-    if (data === 'exit') {        
+    if (data.toString().trim() === 'exit') {
+        stdout.write('Good luck!');
         process.exit();
     }
     wrstr.write(data);
 });
 
 process.on('SIGINT', () => {
-    process.stdout.write('Good luck!');
+    stdout.write('Good luck!');
     process.exit();
 });
